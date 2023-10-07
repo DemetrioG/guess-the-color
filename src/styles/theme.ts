@@ -5,6 +5,7 @@ export const LIGHT = {
   gray: "#3E3E3E",
   green: "#B3D89C",
   red: "#FF707E",
+  text: "#000000",
 };
 
 export const DARK = {
@@ -14,4 +15,5 @@ export const DARK = {
   gray: "#3E3E3E",
   green: "#B3D89C",
   red: "#FF707E",
+  text: "#FFFFFF",
 };

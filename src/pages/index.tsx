@@ -2,9 +2,11 @@ import Head from "next/head";
 import { Montserrat } from "next/font/google";
 import { BaseTheme } from "@/styles/baseTheme";
 import { ThemeContextProvider } from "@/context/theme/themeContext";
-import { App } from "./App";
+import { GlobalStyle } from "@/styles/general";
+import dynamic from "next/dynamic";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
+const App = dynamic(() => import("./App"), { ssr: false });
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
       </Head>
       <ThemeContextProvider>
         <BaseTheme>
+          <GlobalStyle />
           <main className={`${montserrat.className}`}>
             <App />
           </main>
