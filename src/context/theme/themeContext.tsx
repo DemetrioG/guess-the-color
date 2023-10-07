@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
@@ -10,7 +10,7 @@ export const initialThemeState: ITheme = {
   mode: "light",
 };
 
-export const ThemeContext = React.createContext<{
+export const ThemeContext = createContext<{
   theme: ITheme;
   setTheme: React.Dispatch<React.SetStateAction<ITheme>>;
 }>({
@@ -25,9 +25,26 @@ export function ThemeContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [theme, setTheme] = React.useState<ITheme>({
+  const [theme, setTheme] = useState<ITheme>({
     ...initialThemeState,
   });
+
+  function handleSetTheme() {
+    setTheme(() => ({
+      mode: localStorage.getItem("theme") as Theme,
+    }));
+  }
+
+  useEffect(() => {
+    window.addEventListener("storage", handleSetTheme);
+    return () => window.removeEventListener("storage", handleSetTheme);
+  }, []);
+
+  useEffect(() => {
+    if (!!window) {
+      handleSetTheme();
+    }
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

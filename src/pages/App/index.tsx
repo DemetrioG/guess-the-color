@@ -4,6 +4,7 @@ import { ActiveColor } from "@/components/ActiveColor";
 import { OptionButtons } from "@/components/OptionButtons";
 import { IThemeProvider } from "@/styles/baseTheme";
 import { useTheme } from "styled-components";
+import { ChangeTheme } from "@/components/ChangeTheme";
 
 const App = () => {
   const { theme }: IThemeProvider = useTheme();
@@ -22,6 +23,7 @@ const App = () => {
           <OptionButtons activeColor="#468C98" />
         </VStack>
       </Center>
+      <ChangeTheme />
     </div>
   );
 };

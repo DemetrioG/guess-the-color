@@ -6,6 +6,7 @@ export const LIGHT = {
   green: "#B3D89C",
   red: "#FF707E",
   text: "#000000",
+  isOnDarkTheme: false,
 };
 
 export const DARK = {
@@ -16,4 +17,5 @@ export const DARK = {
   green: "#B3D89C",
   red: "#FF707E",
   text: "#FFFFFF",
+  isOnDarkTheme: true,
 };
