@@ -1,7 +1,6 @@
-import { useTheme } from "styled-components";
 import { OptionButtonsProps } from "./types";
-import { IThemeProvider } from "@/styles/baseTheme";
 import { HStack, Text } from "@/styles/general";
+import { Button as BaseButton } from "../Button";
 
 export const OptionButtons = (props: OptionButtonsProps) => {
   const [firstColor, secondColor] = generateRandomHexPair(props.activeColor);
@@ -17,21 +16,14 @@ export const OptionButtons = (props: OptionButtonsProps) => {
 };
 
 const Button = ({ hex }: { hex: string }) => {
-  const { theme }: IThemeProvider = useTheme();
   return (
-    <div
-      style={{
-        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-        backgroundColor: theme?.secondary,
-        padding: "1rem",
+    <BaseButton
+      styles={{
         width: "120px",
-        textAlign: "center",
-        borderRadius: 10,
-        cursor: "pointer",
       }}
     >
       <Text>{hex}</Text>
-    </div>
+    </BaseButton>
   );
 };
 

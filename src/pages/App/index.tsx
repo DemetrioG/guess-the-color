@@ -5,6 +5,7 @@ import { OptionButtons } from "@/components/OptionButtons";
 import { IThemeProvider } from "@/styles/baseTheme";
 import { useTheme } from "styled-components";
 import { ChangeTheme } from "@/components/ChangeTheme";
+import { Reset } from "@/components/Reset";
 
 const App = () => {
   const { theme }: IThemeProvider = useTheme();
@@ -24,6 +25,7 @@ const App = () => {
         </VStack>
       </Center>
       <ChangeTheme />
+      <Reset />
     </div>
   );
 };
