@@ -1,9 +1,12 @@
 import { IThemeProvider } from "@/styles/baseTheme";
 import { useTheme } from "styled-components";
-import { ProgressBarProps } from "./types";
+import { useContext } from "react";
+import { DataContext } from "@/context/data/dataContext";
 
-export const ProgressBar = (props: ProgressBarProps) => {
+export const ProgressBar = () => {
   const { theme }: IThemeProvider = useTheme();
+  const { data } = useContext(DataContext);
+  const value = (data.timer * 100) / 30;
   return (
     <div
       style={{
@@ -15,8 +18,9 @@ export const ProgressBar = (props: ProgressBarProps) => {
     >
       <div
         style={{
+          transition: "width 3.333s ease",
           position: "absolute",
-          width: `${props.percentual}%`,
+          width: `${value}%`,
           height: "100%",
           backgroundColor: theme?.gray,
         }}

@@ -1,9 +1,30 @@
+import { DataContext } from "@/context/data/dataContext";
 import { IThemeProvider } from "@/styles/baseTheme";
 import { HStack, Text, VStack } from "@/styles/general";
+import { useContext, useEffect } from "react";
 import { useTheme } from "styled-components";
 
 export const InfoBar = () => {
   const { theme }: IThemeProvider = useTheme();
+  const { data, setData } = useContext(DataContext);
+
+  useEffect(() => {
+    if (!data.started) return;
+
+    const interval = setInterval(() => {
+      setData((prevData) => {
+        if (prevData.timer < 1) {
+          clearInterval(interval);
+          return { ...prevData, started: false, timer: 30 };
+        } else {
+          return { ...prevData, timer: prevData.timer - 1 };
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [data.started]);
+
   return (
     <HStack>
       <VStack
@@ -18,7 +39,9 @@ export const InfoBar = () => {
         }}
       >
         <Text>Remaing Time (s)</Text>
-        <Text style={{ fontWeight: "bold" }}>30</Text>
+        <Text style={{ fontWeight: "bold", fontSize: "20px" }}>
+          {data.timer}
+        </Text>
       </VStack>
       <VStack
         style={{

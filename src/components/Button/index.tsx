@@ -4,6 +4,7 @@ import { ButtonProps } from "./types";
 
 export const Button = (props: ButtonProps) => {
   const { theme }: IThemeProvider = useTheme();
+  const { children, styles, ...restProps } = props;
   return (
     <div
       style={{
@@ -15,6 +16,7 @@ export const Button = (props: ButtonProps) => {
         cursor: "pointer",
         ...props.styles,
       }}
+      {...restProps}
     >
       {props.children}
     </div>
