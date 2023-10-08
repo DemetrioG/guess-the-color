@@ -25,6 +25,13 @@ export const InfoBar = () => {
     return () => clearInterval(interval);
   }, [data.started]);
 
+  function handleRestart() {
+    return setData((prevData) => ({
+      ...prevData,
+      timer: 30,
+    }));
+  }
+
   return (
     <HStack>
       <VStack
@@ -44,6 +51,7 @@ export const InfoBar = () => {
         </Text>
       </VStack>
       <VStack
+        onClick={handleRestart}
         style={{
           width: "25%",
           backgroundColor: theme?.tertiary,
@@ -51,6 +59,7 @@ export const InfoBar = () => {
           justifyContent: "center",
           alignItems: "center",
           boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+          cursor: "pointer",
         }}
       >
         <Text>Restart</Text>

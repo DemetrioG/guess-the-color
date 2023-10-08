@@ -18,7 +18,6 @@ export const ProgressBar = () => {
     >
       <div
         style={{
-          transition: "width 3.333s ease",
           position: "absolute",
           width: `${value}%`,
           height: "100%",
