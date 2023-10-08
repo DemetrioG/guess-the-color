@@ -11,10 +11,10 @@ export const InfoBar = () => {
   useEffect(() => {
     if (!data.started) return;
 
-    const interval = setInterval(() => {
+    const globalTimerInterval = setInterval(() => {
       setData((prevData) => {
         if (prevData.globalTimer < 1) {
-          clearInterval(interval);
+          clearInterval(globalTimerInterval);
           return { ...prevData, started: false, globalTimer: 30 };
         } else {
           return { ...prevData, globalTimer: prevData.globalTimer - 1 };
@@ -22,13 +22,7 @@ export const InfoBar = () => {
       });
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [data.started]);
-
-  useEffect(() => {
-    if (!data.started) return;
-
-    const interval = setInterval(() => {
+    const sessionTimerInterval = setInterval(() => {
       setData((prevData) => {
         if (prevData.sessionTimer < 2 || prevData.globalTimer === 30) {
           return { ...prevData, sessionTimer: 10 };
@@ -38,9 +32,11 @@ export const InfoBar = () => {
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(globalTimerInterval);
+      clearInterval(sessionTimerInterval);
+    };
   }, [data.started]);
-
   function handleRestart() {
     return setData((prevData) => ({
       ...prevData,
