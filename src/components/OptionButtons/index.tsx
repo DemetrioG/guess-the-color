@@ -1,4 +1,4 @@
-import { OptionButtonsProps } from "./types";
+import { ButtonProps, OptionButtonsProps } from "./types";
 import { HStack, Text } from "@/styles/general";
 import { Button as BaseButton } from "../Button";
 
@@ -15,14 +15,14 @@ export const OptionButtons = (props: OptionButtonsProps) => {
   );
 };
 
-const Button = ({ hex }: { hex: string }) => {
+const Button = (props: ButtonProps) => {
   return (
     <BaseButton
       styles={{
         width: "120px",
       }}
     >
-      <Text>{hex}</Text>
+      <Text>{props.hex}</Text>
     </BaseButton>
   );
 };

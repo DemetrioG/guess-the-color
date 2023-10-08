@@ -2,7 +2,7 @@ import { IThemeProvider } from "@/styles/baseTheme";
 import { Center } from "@/styles/general";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "styled-components";
-import When from "../When";
+import { When } from "../When";
 
 export const ChangeTheme = () => {
   const { theme }: IThemeProvider = useTheme();

@@ -1,11 +1,5 @@
-const When = ({
-  children,
-  is,
-}: {
-  children: JSX.Element | JSX.Element[];
-  is: boolean;
-}) => {
-  return is ? <>{children}</> : <></>;
-};
+import { WhenProps } from "./types";
 
-export default When;
+export const When = (props: WhenProps) => {
+  return props.is ? <>{props.children}</> : <></>;
+};

@@ -1,14 +1,8 @@
 import { IThemeProvider } from "@/styles/baseTheme";
-import { CSSProperties } from "react";
 import { useTheme } from "styled-components";
+import { ButtonProps } from "./types";
 
-export const Button = ({
-  children,
-  styles,
-}: {
-  children: React.ReactNode;
-  styles?: CSSProperties;
-}) => {
+export const Button = (props: ButtonProps) => {
   const { theme }: IThemeProvider = useTheme();
   return (
     <div
@@ -19,10 +13,10 @@ export const Button = ({
         textAlign: "center",
         borderRadius: 10,
         cursor: "pointer",
-        ...styles,
+        ...props.styles,
       }}
     >
-      {children}
+      {props.children}
     </div>
   );
 };
