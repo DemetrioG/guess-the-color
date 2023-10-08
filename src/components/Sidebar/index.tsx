@@ -4,11 +4,23 @@ import { Check, X } from "lucide-react";
 import { useTheme } from "styled-components";
 import { ColorProps, ItemProps } from "./types";
 import { When } from "../When";
+import { useContext } from "react";
+import { DataContext } from "@/context/data/dataContext";
 
 export const Sidebar = () => {
   const { theme }: IThemeProvider = useTheme();
+  const {
+    data: { sidebarList },
+  } = useContext(DataContext);
+
   return (
-    <VStack style={{ backgroundColor: theme?.secondary, height: "100vh" }}>
+    <VStack
+      style={{
+        backgroundColor: theme?.secondary,
+        height: "100vh",
+        minWidth: "350px",
+      }}
+    >
       <VStack
         style={{
           padding: "1.5rem",
@@ -43,18 +55,18 @@ export const Sidebar = () => {
         </div>
       </HStack>
       <VStack style={{ overflow: "auto" }}>
-        {data.map((item, i) => (
-          <Item key={item.guessed} data={{ ...item, index: i }} />
+        {sidebarList.map((item, i) => (
+          <Item key={item.guessed} data={item} index={i} />
         ))}
       </VStack>
     </VStack>
   );
 };
 
-const Item = ({ data }: { data: ItemProps }) => {
+const Item = ({ data, index }: { data: ItemProps; index: number }) => {
   const { theme }: IThemeProvider = useTheme();
   const rightColor = data.color === data.guessed;
-  const isEven = data.index % 2 === 0;
+  const isEven = index % 2 === 0;
 
   return (
     <HStack
@@ -124,56 +136,3 @@ function getContrastColor(hex: string) {
   const contrastColor = luminance > 0.5 ? "#000000" : "#FFFFFF";
   return contrastColor;
 }
-
-const data = [
-  {
-    guessed: "#D72638",
-    color: "#0B6623",
-    time: 2,
-  },
-  {
-    guessed: "#FFA500",
-    color: "#FFA500",
-    time: 3,
-  },
-  {
-    guessed: "#0000FF",
-    color: "#800080",
-    time: 7,
-  },
-  {
-    guessed: "#D72638",
-    color: "#D72638",
-    time: 4,
-  },
-  {
-    guessed: "#0B6623",
-    color: "#0000FF",
-    time: 6,
-  },
-  {
-    guessed: "#FFA500",
-    color: "#FFA500",
-    time: 1,
-  },
-  {
-    guessed: "#800080",
-    color: "#800080",
-    time: 9,
-  },
-  {
-    guessed: "#0B6623",
-    color: "#FFA500",
-    time: 8,
-  },
-  {
-    guessed: "#800080",
-    color: "#D72638",
-    time: 10,
-  },
-  {
-    guessed: "#D72638",
-    color: "#0000FF",
-    time: 5,
-  },
-];
