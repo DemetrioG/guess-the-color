@@ -6,7 +6,7 @@ import { DataContext } from "@/context/data/dataContext";
 export const ProgressBar = () => {
   const { theme }: IThemeProvider = useTheme();
   const { data } = useContext(DataContext);
-  const value = (data.timer * 100) / 30;
+  const value = (data.globalTimer * 100) / 30;
   return (
     <div
       style={{

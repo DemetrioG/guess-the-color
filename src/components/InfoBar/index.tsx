@@ -13,11 +13,27 @@ export const InfoBar = () => {
 
     const interval = setInterval(() => {
       setData((prevData) => {
-        if (prevData.timer < 1) {
+        if (prevData.globalTimer < 1) {
           clearInterval(interval);
-          return { ...prevData, started: false, timer: 30 };
+          return { ...prevData, started: false, globalTimer: 30 };
         } else {
-          return { ...prevData, timer: prevData.timer - 1 };
+          return { ...prevData, globalTimer: prevData.globalTimer - 1 };
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [data.started]);
+
+  useEffect(() => {
+    if (!data.started) return;
+
+    const interval = setInterval(() => {
+      setData((prevData) => {
+        if (prevData.sessionTimer < 2 || prevData.globalTimer === 30) {
+          return { ...prevData, sessionTimer: 10 };
+        } else {
+          return { ...prevData, sessionTimer: prevData.sessionTimer - 1 };
         }
       });
     }, 1000);
@@ -28,7 +44,8 @@ export const InfoBar = () => {
   function handleRestart() {
     return setData((prevData) => ({
       ...prevData,
-      timer: 30,
+      globalTimer: 30,
+      sessionTimer: 10,
     }));
   }
 
@@ -47,7 +64,7 @@ export const InfoBar = () => {
       >
         <Text>Remaing Time (s)</Text>
         <Text style={{ fontWeight: "bold", fontSize: "20px" }}>
-          {data.timer}
+          {data.globalTimer}
         </Text>
       </VStack>
       <VStack
@@ -84,7 +101,7 @@ export const InfoBar = () => {
           }}
         >
           <Text>High Score</Text>
-          <Text style={{ fontWeight: "bold" }}>500</Text>
+          <Text style={{ fontWeight: "bold" }}>{data.sessionTimer}</Text>
         </HStack>
         <HStack
           style={{

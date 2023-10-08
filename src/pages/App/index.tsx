@@ -7,9 +7,12 @@ import { useTheme } from "styled-components";
 import { ChangeTheme } from "@/components/ChangeTheme";
 import { Reset } from "@/components/Reset";
 import { Sidebar } from "@/components/Sidebar";
+import { useColors } from "./hooks/useApp";
 
 const App = () => {
   const { theme }: IThemeProvider = useTheme();
+  const { hex } = useColors();
+
   return (
     <HStack>
       <Sidebar />
@@ -25,8 +28,8 @@ const App = () => {
             }}
           >
             <InfoBar />
-            <ActiveColor color="#468C98" />
-            <OptionButtons activeColor="#468C98" />
+            <ActiveColor color={hex} />
+            <OptionButtons activeColor={hex} />
           </VStack>
         </Center>
         <ChangeTheme />

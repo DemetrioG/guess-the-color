@@ -1,8 +1,10 @@
 import { ButtonProps, OptionButtonsProps } from "./types";
 import { HStack, Text } from "@/styles/general";
 import { Button as BaseButton } from "../Button";
+import { generateRandomHex } from "@/utils/general.helper";
+import { memo } from "react";
 
-export const OptionButtons = (props: OptionButtonsProps) => {
+export const OptionButtons = memo((props: OptionButtonsProps) => {
   const [firstColor, secondColor] = generateRandomHexPair(props.activeColor);
   const shuffledColor = shuffle([props.activeColor, firstColor, secondColor]);
 
@@ -13,7 +15,7 @@ export const OptionButtons = (props: OptionButtonsProps) => {
       <Button hex={shuffledColor[2]} />
     </HStack>
   );
-};
+});
 
 const Button = (props: ButtonProps) => {
   return (
@@ -28,17 +30,9 @@ const Button = (props: ButtonProps) => {
 };
 
 function generateRandomHexPair(activeHex: string) {
-  const characters = "0123456789ABCDEF";
   const randomHexPair: string[] = [];
-
   while (randomHexPair.length < 2) {
-    const randomHex =
-      "#" +
-      Array.from(
-        { length: 6 },
-        () => characters[Math.floor(Math.random() * 16)]
-      ).join("");
-
+    const randomHex = generateRandomHex();
     if (randomHex !== activeHex && !randomHexPair.includes(randomHex)) {
       randomHexPair.push(randomHex);
     }

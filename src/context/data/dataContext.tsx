@@ -2,12 +2,14 @@ import React, { createContext, useState } from "react";
 
 interface IData {
   started: boolean;
-  timer: number;
+  globalTimer: number;
+  sessionTimer: number;
 }
 
 export const initialDataState: IData = {
   started: false,
-  timer: 30,
+  globalTimer: 30,
+  sessionTimer: 10,
 };
 
 export const DataContext = createContext<{
