@@ -1,50 +1,14 @@
 import { DataContext } from "@/context/data/dataContext";
 import { IThemeProvider } from "@/styles/baseTheme";
 import { HStack, Text, VStack } from "@/styles/general";
-import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useTheme } from "styled-components";
+import { useInfoBar } from "./hooks";
 
 export const InfoBar = () => {
   const { theme }: IThemeProvider = useTheme();
-  const { data, setData } = useContext(DataContext);
-
-  useEffect(() => {
-    if (!data.started) return;
-
-    const globalTimerInterval = setInterval(() => {
-      setData((prevData) => {
-        if (prevData.globalTimer < 1) {
-          clearInterval(globalTimerInterval);
-          return { ...prevData, started: false, globalTimer: GLOBAL_TIME };
-        } else {
-          return { ...prevData, globalTimer: prevData.globalTimer - 1 };
-        }
-      });
-    }, 1000);
-
-    const sessionTimerInterval = setInterval(() => {
-      setData((prevData) => {
-        if (prevData.sessionTimer < 2 || prevData.globalTimer === GLOBAL_TIME) {
-          return { ...prevData, sessionTimer: SESSION_TIME };
-        } else {
-          return { ...prevData, sessionTimer: prevData.sessionTimer - 1 };
-        }
-      });
-    }, 1000);
-
-    return () => {
-      clearInterval(globalTimerInterval);
-      clearInterval(sessionTimerInterval);
-    };
-  }, [data.started]);
-  function handleRestart() {
-    return setData((prevData) => ({
-      ...prevData,
-      globalTimer: GLOBAL_TIME,
-      sessionTimer: SESSION_TIME,
-    }));
-  }
+  const { data } = useContext(DataContext);
+  const { handleRestart } = useInfoBar();
 
   return (
     <HStack>

@@ -3,17 +3,11 @@ import { Center } from "@/styles/general";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "styled-components";
 import { When } from "../When";
+import { useChangeTheme } from "./hooks";
 
 export const ChangeTheme = () => {
   const { theme }: IThemeProvider = useTheme();
-
-  function handleChangeTheme() {
-    const isOnDarkTheme = localStorage.getItem("theme") === "dark";
-    isOnDarkTheme
-      ? localStorage.setItem("theme", "light")
-      : localStorage.setItem("theme", "dark");
-    return window.dispatchEvent(new Event("storage"));
-  }
+  const { handleChangeTheme } = useChangeTheme();
 
   return (
     <Center

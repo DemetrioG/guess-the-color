@@ -7,7 +7,7 @@ import { useTheme } from "styled-components";
 import { ChangeTheme } from "@/components/ChangeTheme";
 import { Reset } from "@/components/Reset";
 import { Sidebar } from "@/components/Sidebar";
-import { useColors } from "./hooks/useApp";
+import { useColors } from "./hooks";
 
 const App = () => {
   const { theme }: IThemeProvider = useTheme();

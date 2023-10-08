@@ -5,18 +5,11 @@ import { useContext } from "react";
 import { DataContext } from "@/context/data/dataContext";
 import { When } from "../When";
 import { Button } from "../Button";
+import { useStart } from "./hooks";
 
 export const ActiveColor = (props: ActiveColorProps) => {
-  const { data, setData } = useContext(DataContext);
-
-  function handleStart() {
-    setData({
-      ...data,
-      started: true,
-      sidebarList: [],
-      score: 0,
-    });
-  }
+  const { data } = useContext(DataContext);
+  const { handleStart } = useStart();
 
   return (
     <VStack>

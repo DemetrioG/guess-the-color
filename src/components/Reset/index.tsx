@@ -1,23 +1,9 @@
 import { Text } from "@/styles/general";
 import { Button } from "../Button";
-import { DataContext } from "@/context/data/dataContext";
-import { useContext } from "react";
-import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
+import { useReset } from "./hooks";
 
 export const Reset = () => {
-  const { setData } = useContext(DataContext);
-
-  function handleReset() {
-    localStorage.removeItem("highScore");
-    setData((prevData) => ({
-      ...prevData,
-      started: false,
-      score: 0,
-      sidebarList: [],
-      globalTimer: GLOBAL_TIME,
-      sessionTimer: SESSION_TIME,
-    }));
-  }
+  const { handleReset } = useReset();
 
   return (
     <Button
