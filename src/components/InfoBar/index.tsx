@@ -78,8 +78,6 @@ export const InfoBar = () => {
           <Text style={{ fontWeight: "bold" }}>{data.score}</Text>
         </HStack>
       </VStack>
-      <Text>Session Timer</Text>
-      <Text style={{ fontWeight: "bold" }}>{data.sessionTimer}</Text>
     </HStack>
   );
 };

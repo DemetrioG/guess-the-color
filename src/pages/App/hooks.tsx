@@ -2,8 +2,10 @@ import { useState, useContext, useEffect, useMemo } from "react";
 import { DataContext } from "@/context/data/dataContext";
 import {
   SESSION_TIME,
+  TIMEOUT_ANSWER,
   generateRandomHex,
   generateRandomHexPair,
+  handleScore,
   shuffle,
 } from "@/utils/general.helper";
 import { ItemProps } from "@/components/Sidebar/types";
@@ -18,28 +20,30 @@ export const useColors = () => {
   );
 
   useEffect(() => {
-    if (data.sessionTimer !== SESSION_TIME) return;
     setHex(generateRandomHex());
-  }, [data.sessionTimer]);
-
-  useEffect(() => {
-    setHex(generateRandomHex());
+    setData((prevData) => ({
+      ...prevData,
+      chosed: false,
+    }));
   }, [data.trigger]);
 
-  // useEffect(() => {
-  //   if (data.sessionTimer !== SESSION_TIME || !data.started) return;
-  //   const item: ItemProps = {
-  //     color: hex,
-  //     guessed: firstColor,
-  //     time: SESSION_TIME,
-  //   };
+  useEffect(() => {
+    if (data.sessionTimer !== SESSION_TIME || !data.started || data.chosed)
+      return;
 
-  //   setHex(generateRandomHex());
-  //   setData((prevData) => ({
-  //     ...prevData,
-  //     sidebarList: [item, ...prevData.sidebarList],
-  //   }));
-  // }, [data.sessionTimer]);
+    const item: ItemProps = {
+      color: hex,
+      guessed: firstColor,
+      time: SESSION_TIME,
+    };
+
+    setHex(generateRandomHex());
+    setData((prevData) => ({
+      ...prevData,
+      score: handleScore(prevData.score, TIMEOUT_ANSWER),
+      sidebarList: [item, ...prevData.sidebarList],
+    }));
+  }, [data.sessionTimer]);
 
   return {
     activeColor: hex,

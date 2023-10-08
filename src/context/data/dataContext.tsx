@@ -9,6 +9,7 @@ interface IData {
   sidebarList: ItemProps[] | [];
   trigger: number;
   score: number;
+  chosed: boolean;
 }
 
 export const initialDataState: IData = {
@@ -18,6 +19,7 @@ export const initialDataState: IData = {
   sidebarList: [],
   trigger: 0,
   score: 0,
+  chosed: false,
 };
 
 export const DataContext = createContext<{
