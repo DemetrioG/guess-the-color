@@ -1,6 +1,7 @@
 import { DataContext } from "@/context/data/dataContext";
 import { IThemeProvider } from "@/styles/baseTheme";
 import { HStack, Text, VStack } from "@/styles/general";
+import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
 import { useContext, useEffect } from "react";
 import { useTheme } from "styled-components";
 
@@ -15,7 +16,7 @@ export const InfoBar = () => {
       setData((prevData) => {
         if (prevData.globalTimer < 1) {
           clearInterval(globalTimerInterval);
-          return { ...prevData, started: false, globalTimer: 30 };
+          return { ...prevData, started: false, globalTimer: GLOBAL_TIME };
         } else {
           return { ...prevData, globalTimer: prevData.globalTimer - 1 };
         }
@@ -24,8 +25,8 @@ export const InfoBar = () => {
 
     const sessionTimerInterval = setInterval(() => {
       setData((prevData) => {
-        if (prevData.sessionTimer < 2 || prevData.globalTimer === 30) {
-          return { ...prevData, sessionTimer: 10 };
+        if (prevData.sessionTimer < 2 || prevData.globalTimer === GLOBAL_TIME) {
+          return { ...prevData, sessionTimer: SESSION_TIME };
         } else {
           return { ...prevData, sessionTimer: prevData.sessionTimer - 1 };
         }
@@ -40,8 +41,8 @@ export const InfoBar = () => {
   function handleRestart() {
     return setData((prevData) => ({
       ...prevData,
-      globalTimer: 30,
-      sessionTimer: 10,
+      globalTimer: GLOBAL_TIME,
+      sessionTimer: SESSION_TIME,
     }));
   }
 
@@ -97,7 +98,9 @@ export const InfoBar = () => {
           }}
         >
           <Text>High Score</Text>
-          <Text style={{ fontWeight: "bold" }}>{data.sessionTimer}</Text>
+          <Text style={{ fontWeight: "bold" }}>
+            {localStorage.getItem("highScore") ?? 0}
+          </Text>
         </HStack>
         <HStack
           style={{
@@ -108,9 +111,11 @@ export const InfoBar = () => {
           }}
         >
           <Text>Score</Text>
-          <Text style={{ fontWeight: "bold" }}>300</Text>
+          <Text style={{ fontWeight: "bold" }}>{data.score}</Text>
         </HStack>
       </VStack>
+      <Text>Session Timer</Text>
+      <Text style={{ fontWeight: "bold" }}>{data.sessionTimer}</Text>
     </HStack>
   );
 };

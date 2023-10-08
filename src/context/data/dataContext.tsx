@@ -1,4 +1,5 @@
 import { ItemProps } from "@/components/Sidebar/types";
+import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
 import React, { createContext, useState } from "react";
 
 interface IData {
@@ -6,13 +7,17 @@ interface IData {
   globalTimer: number;
   sessionTimer: number;
   sidebarList: ItemProps[] | [];
+  trigger: number;
+  score: number;
 }
 
 export const initialDataState: IData = {
   started: false,
-  globalTimer: 30,
-  sessionTimer: 10,
+  globalTimer: GLOBAL_TIME,
+  sessionTimer: SESSION_TIME,
   sidebarList: [],
+  trigger: 0,
+  score: 0,
 };
 
 export const DataContext = createContext<{

@@ -13,6 +13,8 @@ export const ActiveColor = (props: ActiveColorProps) => {
     setData({
       ...data,
       started: true,
+      sidebarList: [],
+      score: 0,
     });
   }
 

@@ -11,7 +11,7 @@ import { useColors } from "./hooks/useApp";
 
 const App = () => {
   const { theme }: IThemeProvider = useTheme();
-  const { hex } = useColors();
+  const colors = useColors();
 
   return (
     <HStack>
@@ -28,8 +28,8 @@ const App = () => {
             }}
           >
             <InfoBar />
-            <ActiveColor color={hex} />
-            <OptionButtons activeColor={hex} />
+            <ActiveColor color={colors.activeColor} />
+            <OptionButtons {...colors} />
           </VStack>
         </Center>
         <ChangeTheme />

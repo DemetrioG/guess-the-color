@@ -1,44 +1,45 @@
 import { ButtonProps, OptionButtonsProps } from "./types";
 import { HStack, Text } from "@/styles/general";
 import { Button as BaseButton } from "../Button";
-import { generateRandomHex } from "@/utils/general.helper";
-import { memo, useCallback, useMemo } from "react";
 import { useContext } from "react";
 import { DataContext } from "@/context/data/dataContext";
 import { ItemProps } from "../Sidebar/types";
+import {
+  CORRECT_ANSWER,
+  SESSION_TIME,
+  WRONG_ANSWER,
+} from "@/utils/general.helper";
 
-export const OptionButtons = memo((props: OptionButtonsProps) => {
+export const OptionButtons = (props: OptionButtonsProps) => {
   const { data, setData } = useContext(DataContext);
-  const [firstColor, secondColor] = generateRandomHexPair(props.activeColor);
-  const shuffledColor = useMemo(
-    () => shuffle([props.activeColor, firstColor, secondColor]),
-    [props.activeColor]
-  );
 
-  const handlePressItem = useCallback(
-    (hex: string) => {
-      const chosedList: ItemProps = {
-        color: props.activeColor,
-        guessed: hex,
-        time: 10 - data.sessionTimer,
-      };
-      setData((prevData) => ({
-        ...prevData,
-        sidebarList: [chosedList, ...prevData.sidebarList],
-        sessionTimer: 10,
-      }));
-    },
-    [props.activeColor, data.sessionTimer]
-  );
+  function handlePressItem(hex: string) {
+    if (!data.started) return;
+
+    const rightColor = hex === props.activeColor;
+    const chosedList: ItemProps = {
+      color: props.activeColor,
+      guessed: hex,
+      time: SESSION_TIME - data.sessionTimer,
+    };
+
+    setData((prevData) => ({
+      ...prevData,
+      sidebarList: [chosedList, ...prevData.sidebarList],
+      sessionTimer: SESSION_TIME,
+      trigger: Math.random(),
+      score: handleScore(prevData.score, rightColor),
+    }));
+  }
 
   return (
     <HStack style={{ justifyContent: "space-between" }}>
-      {shuffledColor.map((color, i) => (
+      {props.shuffledList.map((color, i) => (
         <Button key={i} hex={color} onClick={() => handlePressItem(color)} />
       ))}
     </HStack>
   );
-});
+};
 
 const Button = (props: ButtonProps) => {
   const { hex, ...restProps } = props;
@@ -49,27 +50,25 @@ const Button = (props: ButtonProps) => {
       }}
       {...restProps}
     >
-      <Text>{props.hex}</Text>
+      <Text
+        style={{
+          WebkitUserSelect: "none",
+          msUserSelect: "none",
+          userSelect: "none",
+        }}
+      >
+        {props.hex}
+      </Text>
     </BaseButton>
   );
 };
 
-function generateRandomHexPair(activeHex: string) {
-  const randomHexPair: string[] = [];
-  while (randomHexPair.length < 2) {
-    const randomHex = generateRandomHex();
-    if (randomHex !== activeHex && !randomHexPair.includes(randomHex)) {
-      randomHexPair.push(randomHex);
-    }
+function handleScore(prevScore: number, isRight: boolean) {
+  const calcScore = prevScore + (isRight ? CORRECT_ANSWER : WRONG_ANSWER);
+  const score = calcScore > 0 ? calcScore : 0;
+  const highScore = Number(localStorage.getItem("highScore") ?? 0);
+  if (score > highScore) {
+    localStorage.setItem("highScore", score.toString());
   }
-
-  return randomHexPair;
-}
-
-function shuffle(array: string[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
+  return score;
 }

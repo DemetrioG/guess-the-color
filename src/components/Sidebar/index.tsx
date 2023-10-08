@@ -56,7 +56,7 @@ export const Sidebar = () => {
       </HStack>
       <VStack style={{ overflow: "auto" }}>
         {sidebarList.map((item, i) => (
-          <Item key={item.guessed} data={item} index={i} />
+          <Item key={i} data={item} index={i} />
         ))}
       </VStack>
     </VStack>
