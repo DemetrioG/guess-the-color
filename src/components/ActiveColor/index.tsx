@@ -14,6 +14,7 @@ export const ActiveColor = (props: ActiveColorProps) => {
   return (
     <VStack>
       <div
+        data-testid="active-color"
         style={{
           position: "relative",
           overflow: "hidden",
