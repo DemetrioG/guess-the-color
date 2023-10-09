@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { InfoBar } from ".";
 import { DataContext } from "@/context/data/dataContext";
 
@@ -21,33 +21,33 @@ const Content = () => {
 
 describe("InfoBar", () => {
   test("renders InfoBar component", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <InfoBar />
       </BaseWrap>
     );
-    expect(screen.getByTestId("info-bar")).toBeInTheDocument();
+    expect(getByTestId("info-bar")).toBeInTheDocument();
   });
 
   test("displays remaining time correctly", () => {
-    render(
+    const { getByText } = render(
       <BaseWrap>
         <Content />
       </BaseWrap>
     );
-    expect(screen.getByText("Remaing Time (s)")).toBeInTheDocument();
-    expect(screen.getByText("60")).toBeInTheDocument();
+    expect(getByText("Remaing Time (s)")).toBeInTheDocument();
+    expect(getByText("60")).toBeInTheDocument();
   });
 
   test("displays high score and current score correctly", () => {
-    render(
+    const { getByText } = render(
       <BaseWrap>
         <Content />
       </BaseWrap>
     );
-    expect(screen.getByText("High Score")).toBeInTheDocument();
-    expect(screen.getByText("10")).toBeInTheDocument();
-    expect(screen.getByText("Score")).toBeInTheDocument();
-    expect(screen.getByText("5")).toBeInTheDocument();
+    expect(getByText("High Score")).toBeInTheDocument();
+    expect(getByText("10")).toBeInTheDocument();
+    expect(getByText("Score")).toBeInTheDocument();
+    expect(getByText("5")).toBeInTheDocument();
   });
 });

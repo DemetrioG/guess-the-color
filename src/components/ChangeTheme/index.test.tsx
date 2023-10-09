@@ -1,5 +1,5 @@
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ChangeTheme } from ".";
 import { useEffect } from "react";
 
@@ -13,32 +13,32 @@ const Content = (props: { theme: "dark" | "light" }) => {
 
 describe("ChangeTheme", () => {
   test("renders without crashing", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <ChangeTheme />
       </BaseWrap>
     );
-    const changeThemeElement = screen.getByTestId("change-theme");
+    const changeThemeElement = getByTestId("change-theme");
     expect(changeThemeElement).toBeInTheDocument();
   });
 
   test("render moon icon when theme is light", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <Content theme="light" />
       </BaseWrap>
     );
-    const changeThemeElement = screen.getByTestId("moon");
+    const changeThemeElement = getByTestId("moon");
     expect(changeThemeElement).toBeInTheDocument();
   });
 
   test("render sun icon when theme is dark", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <Content theme="dark" />
       </BaseWrap>
     );
-    const changeThemeElement = screen.getByTestId("sun");
+    const changeThemeElement = getByTestId("sun");
     expect(changeThemeElement).toBeInTheDocument();
   });
 });

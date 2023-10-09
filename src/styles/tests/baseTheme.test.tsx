@@ -39,11 +39,9 @@ describe("BaseTheme", () => {
 
   it("should apply the dark theme when theme mode is dark", () => {
     const { container } = render(
-      <ThemeContextProvider>
-        <BaseTheme>
-          <Content theme="dark" />
-        </BaseTheme>
-      </ThemeContextProvider>
+      <BaseWrap>
+        <Content theme="dark" />
+      </BaseWrap>
     );
     expect(container.firstChild).toHaveStyle("background-color: #000000");
   });

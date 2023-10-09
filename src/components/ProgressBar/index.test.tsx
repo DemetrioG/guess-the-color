@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ProgressBar } from ".";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 import { DataContext } from "@/context/data/dataContext";
@@ -27,13 +27,13 @@ describe("ProgressBar", () => {
   });
 
   test("checks if the width of the div matches the value", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <Content />
       </BaseWrap>
     );
 
-    const progressBarElement = screen.getByTestId("progress-bar-value");
+    const progressBarElement = getByTestId("progress-bar-value");
     const value = (60 * 100) / GLOBAL_TIME;
     expect(progressBarElement).toHaveStyle(`width: ${value}%`);
   });

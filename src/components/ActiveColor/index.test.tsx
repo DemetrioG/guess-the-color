@@ -1,47 +1,47 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ActiveColor } from ".";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 
 describe("ActiveColor", () => {
   test("renders without crashing", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <ActiveColor color="red" />
       </BaseWrap>
     );
-    const activeColorElement = screen.getByTestId("active-color");
+    const activeColorElement = getByTestId("active-color");
     expect(activeColorElement).toBeInTheDocument();
   });
 
   test("displays the correct background color", () => {
     const color = "blue";
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <ActiveColor color={color} />
       </BaseWrap>
     );
-    const activeColorElement = screen.getByTestId("active-color");
+    const activeColorElement = getByTestId("active-color");
     expect(activeColorElement).toHaveStyle(`background-color: ${color}`);
   });
 
   test("renders the ProgressBar component", () => {
-    render(
+    const { getByTestId } = render(
       <BaseWrap>
         <ActiveColor color="red" />
       </BaseWrap>
     );
-    const progressBarElement = screen.getByTestId("progress-bar");
+    const progressBarElement = getByTestId("progress-bar");
     expect(progressBarElement).toBeInTheDocument();
   });
 
   test("renders the START button when data.started is false", () => {
-    render(
+    const { getByText } = render(
       <BaseWrap>
         <ActiveColor color="red" />
       </BaseWrap>
     );
-    const startButtonElement = screen.getByText("START");
+    const startButtonElement = getByText("START");
     expect(startButtonElement).toBeInTheDocument();
   });
 });

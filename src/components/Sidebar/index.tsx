@@ -56,14 +56,16 @@ export const Sidebar = () => {
       </HStack>
       <VStack style={{ overflow: "auto" }}>
         {sidebarList.map((item, i) => (
-          <Item key={i} data={item} index={i} />
+          <div role="item" key={i}>
+            <Item data={item} index={i} />
+          </div>
         ))}
       </VStack>
     </VStack>
   );
 };
 
-const Item = ({ data, index }: { data: ItemProps; index: number }) => {
+export const Item = ({ data, index }: { data: ItemProps; index: number }) => {
   const { theme }: IThemeProvider = useTheme();
   const rightColor = data.color === data.guessed;
   const isEven = index % 2 === 0;
@@ -78,16 +80,22 @@ const Item = ({ data, index }: { data: ItemProps; index: number }) => {
       }}
     >
       <When is={!rightColor}>
-        <Color data={data.guessed} />
-        <Color data={data.color} />
+        <div data-testid="color-guessed">
+          <Color data={data.guessed} />
+        </div>
+        <div data-testid="color-correct">
+          <Color data={data.color} />
+        </div>
       </When>
       <When is={rightColor}>
-        <Color
-          data={data.color}
-          styles={{
-            width: "215px",
-          }}
-        ></Color>
+        <div data-testid="color-guessed/correct">
+          <Color
+            data={data.color}
+            styles={{
+              width: "215px",
+            }}
+          ></Color>
+        </div>
       </When>
       <Center
         style={{
@@ -99,10 +107,14 @@ const Item = ({ data, index }: { data: ItemProps; index: number }) => {
         }}
       >
         <When is={rightColor}>
-          <Check size={20} />
+          <div data-testid="check">
+            <Check size={20} />
+          </div>
         </When>
         <When is={!rightColor}>
-          <X size={20} />
+          <div data-testid="x">
+            <X size={20} />
+          </div>
         </When>
       </Center>
       <Text style={{ fontWeight: "bold", fontSize: "18px" }}>{data.time}s</Text>
@@ -110,9 +122,10 @@ const Item = ({ data, index }: { data: ItemProps; index: number }) => {
   );
 };
 
-const Color = (props: ColorProps) => {
+export const Color = (props: ColorProps) => {
   return (
     <Center
+      data-testid="color"
       style={{
         backgroundColor: props.data,
         padding: "1rem",
@@ -127,7 +140,7 @@ const Color = (props: ColorProps) => {
   );
 };
 
-function getContrastColor(hex: string) {
+export function getContrastColor(hex: string) {
   const red = parseInt(hex.substring(1, 3), 16);
   const green = parseInt(hex.substring(3, 5), 16);
   const blue = parseInt(hex.substring(5, 7), 16);
