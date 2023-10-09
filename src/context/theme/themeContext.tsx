@@ -31,7 +31,7 @@ export function ThemeContextProvider({
 
   function handleSetTheme() {
     setTheme(() => ({
-      mode: localStorage.getItem("theme") as Theme,
+      mode: (localStorage.getItem("theme") as Theme) ?? "light",
     }));
   }
 
