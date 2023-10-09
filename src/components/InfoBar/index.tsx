@@ -11,7 +11,7 @@ export const InfoBar = () => {
   const { handleRestart } = useInfoBar();
 
   return (
-    <HStack>
+    <HStack data-testid="info-bar">
       <VStack
         style={{
           borderTopLeftRadius: 10,

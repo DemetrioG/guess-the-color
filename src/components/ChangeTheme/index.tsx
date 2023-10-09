@@ -11,6 +11,7 @@ export const ChangeTheme = () => {
 
   return (
     <Center
+      data-testid="change-theme"
       style={{
         position: "absolute",
         top: 20,
@@ -24,10 +25,14 @@ export const ChangeTheme = () => {
       onClick={handleChangeTheme}
     >
       <When is={!theme?.isOnDarkTheme}>
-        <Moon color={theme?.text} />
+        <div data-testid="moon">
+          <Moon color={theme?.text} />
+        </div>
       </When>
       <When is={!!theme?.isOnDarkTheme}>
-        <Sun color={theme?.text} />
+        <div data-testid="sun">
+          <Sun color={theme?.text} />
+        </div>
       </When>
     </Center>
   );
