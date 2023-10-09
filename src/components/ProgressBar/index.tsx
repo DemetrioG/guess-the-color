@@ -10,6 +10,7 @@ export const ProgressBar = () => {
   const value = (data.globalTimer * 100) / GLOBAL_TIME;
   return (
     <div
+      data-testid="progress-bar"
       style={{
         width: "100%",
         height: "15px",

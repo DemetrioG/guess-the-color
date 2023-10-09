@@ -25,7 +25,7 @@ export const ActiveColor = (props: ActiveColorProps) => {
           transition: "background-color 0.5s ease",
         }}
       >
-        <ProgressBar />
+        <ProgressBar data-testid="progress-bar" />
         <When is={!data.started}>
           <VStack
             style={{

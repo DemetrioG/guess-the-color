@@ -4,11 +4,14 @@ import { render } from "@testing-library/react";
 import { ThemeProvider, useTheme } from "styled-components";
 import { BaseTheme, IThemeProvider } from "../baseTheme";
 import { ThemeContextProvider } from "@/context/theme/themeContext";
+import { DataContextProvider } from "@/context/data/dataContext";
 
 export const BaseWrap = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeContextProvider>
-      <BaseTheme>{children}</BaseTheme>
+      <DataContextProvider>
+        <BaseTheme>{children}</BaseTheme>
+      </DataContextProvider>
     </ThemeContextProvider>
   );
 };

@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { screen } from "@testing-library/react";
 import { ActiveColor } from ".";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
-import { useStart } from "./hooks";
 
 describe("ActiveColor", () => {
   test("renders without crashing", () => {
@@ -27,16 +26,23 @@ describe("ActiveColor", () => {
     expect(activeColorElement).toHaveStyle(`background-color: ${color}`);
   });
 
-  // test("calls handleStart on button click", () => {
-  //   const { handleStart } = useStart();
-  //   render(
-  //     <BaseWrap>
-  //       <ActiveColor color="green" />
-  //     </BaseWrap>
-  //   );
-  //   const startButton = screen.getByText("START");
-  //   const parentElement = startButton.parentElement as Element;
-  //   fireEvent.click(parentElement);
-  //   expect(handleStart).toHaveBeenCalled();
-  // });
+  test("renders the ProgressBar component", () => {
+    render(
+      <BaseWrap>
+        <ActiveColor color="red" />
+      </BaseWrap>
+    );
+    const progressBarElement = screen.getByTestId("progress-bar");
+    expect(progressBarElement).toBeInTheDocument();
+  });
+
+  test("renders the START button when data.started is false", () => {
+    render(
+      <BaseWrap>
+        <ActiveColor color="red" />
+      </BaseWrap>
+    );
+    const startButtonElement = screen.getByText("START");
+    expect(startButtonElement).toBeInTheDocument();
+  });
 });
