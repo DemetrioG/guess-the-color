@@ -9,16 +9,22 @@ export const OptionButtons = (props: OptionButtonsProps) => {
   return (
     <HStack style={{ justifyContent: "space-between" }}>
       {props.shuffledList.map((color, i) => (
-        <Button key={i} hex={color} onClick={() => handlePressItem(color)} />
+        <Button
+          key={i}
+          hex={color}
+          onClick={() => handlePressItem(color)}
+          role="option-button"
+        />
       ))}
     </HStack>
   );
 };
 
-const Button = (props: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
   const { hex, ...restProps } = props;
   return (
     <BaseButton
+      data-testid="button"
       styles={{
         width: "120px",
       }}

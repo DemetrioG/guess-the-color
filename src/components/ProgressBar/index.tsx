@@ -19,6 +19,7 @@ export const ProgressBar = () => {
       }}
     >
       <div
+        data-testid="progress-bar-value"
         style={{
           position: "absolute",
           width: `${value}%`,
