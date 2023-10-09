@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { render } from "@testing-library/react";
-import { ProgressBar } from ".";
+import { ProgressBar } from "..";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 import { DataContext } from "@/context/data/dataContext";
 import { GLOBAL_TIME } from "@/utils/general.helper";

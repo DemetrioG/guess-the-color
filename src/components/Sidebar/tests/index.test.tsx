@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Color, Item, Sidebar, getContrastColor } from ".";
+import { Color, Item, Sidebar, getContrastColor } from "..";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 import { DataContext } from "@/context/data/dataContext";
 import { useContext, useEffect } from "react";

@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Button } from ".";
+import { Button } from "..";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 
 describe("Button component", () => {

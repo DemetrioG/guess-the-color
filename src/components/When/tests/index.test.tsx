@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { When } from ".";
+import { When } from "..";
 
 describe("When", () => {
   it('renders children when "is" prop is true', () => {

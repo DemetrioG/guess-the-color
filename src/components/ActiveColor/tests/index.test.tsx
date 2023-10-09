@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import { ActiveColor } from ".";
+import { ActiveColor } from "..";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 
 describe("ActiveColor", () => {

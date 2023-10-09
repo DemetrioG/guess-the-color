@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 import { render } from "@testing-library/react";
-import { InfoBar } from ".";
+import { InfoBar } from "..";
 import { DataContext } from "@/context/data/dataContext";
 
 const Content = () => {

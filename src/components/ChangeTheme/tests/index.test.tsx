@@ -1,6 +1,6 @@
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 import { render } from "@testing-library/react";
-import { ChangeTheme } from ".";
+import { ChangeTheme } from "..";
 import { useEffect } from "react";
 
 const Content = (props: { theme: "dark" | "light" }) => {

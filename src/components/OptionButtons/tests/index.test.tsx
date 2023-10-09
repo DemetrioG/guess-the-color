@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Button, OptionButtons } from ".";
+import { Button, OptionButtons } from "..";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 
 describe("OptionButtons", () => {
