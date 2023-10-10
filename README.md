@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Guess the color
+![Coverage](https://img.shields.io/badge/coverage-97%25-%2344cc11.svg)
 
-## Getting Started
+Você é bom com cores e códigos hexadecimais? Chegou a hora de testar suas habilidades!
 
-First, run the development server:
+<strong>Acerte o maior número de cores no intervalo de 30s</strong> ⏱️
+
+## Prévia
+![Group 12](https://github.com/DemetrioG/guess-the-color/assets/79758394/9e0d68bb-e25f-4cd7-bc5f-c9a3d5dc8b48)
+
+## Instalação
+
+1. Clone o repositório para seu ambiente local:
+```bash
+git clone https://github.com/DemetrioG/guess-the-color.git
+```
+
+2. Na linha de comando na pasta raíz do projeto, execute:
+```bash
+npm install
+```
+
+## Testes
+
+Para rodar os testes do projeto, execute:
+```bash
+npm run test
+```
+
+Caso queira visualizar a cobertura de testes, execute:
+```bash
+npm run test:coverage
+```
+
+## Execução
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Após, abra o seu navegador na porta listada pela linha de comando. `Ex: http://localhost:3000`
