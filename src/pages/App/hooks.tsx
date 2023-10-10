@@ -13,10 +13,11 @@ import { ItemProps } from "@/components/Sidebar/types";
 export const useColors = () => {
   const { data, setData } = useContext(DataContext);
   const [hex, setHex] = useState("#468C98");
-  const randomHex = generateRandomHexPair(hex);
+
+  const randomHex = generateRandomHexPair(hex, data.difficulty);
   const shuffledList = useMemo(
     () => shuffle([hex, ...randomHex]),
-    [hex]
+    [hex, data.difficulty]
   );
 
   useEffect(() => {

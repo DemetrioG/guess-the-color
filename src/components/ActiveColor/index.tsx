@@ -22,7 +22,7 @@ export const ActiveColor = (props: ActiveColorProps) => {
           overflow: "hidden",
           backgroundColor: props.color,
           width: "100%",
-          height: "400px",
+          height: "300px",
           borderRadius: 10,
           transition: "background-color 0.5s ease",
         }}
@@ -36,35 +36,37 @@ export const ActiveColor = (props: ActiveColorProps) => {
               height: "100%",
             }}
           >
-            <When is={!data.difficulty}>
-              <Button
-                styles={{ padding: "1rem 4rem" }}
-                onClick={difficulty.open}
-              >
-                <Text style={{ fontWeight: "bold" }}>START</Text>
-              </Button>
-            </When>
-            <When is={difficulty.isOpen}>
-              <VStack style={{ gap: "1rem" }}>
+            <When is={!data.started}>
+              <When is={!data.difficulty && !difficulty.isOpen}>
                 <Button
                   styles={{ padding: "1rem 4rem" }}
-                  onClick={() => handleStart(Difficulty.Easy)}
+                  onClick={difficulty.open}
                 >
-                  <Text style={{ fontWeight: "bold" }}>Easy</Text>
+                  <Text style={{ fontWeight: "bold" }}>START</Text>
                 </Button>
-                <Button
-                  styles={{ padding: "1rem 4rem" }}
-                  onClick={() => handleStart(Difficulty.Medium)}
-                >
-                  <Text style={{ fontWeight: "bold" }}>Medium</Text>
-                </Button>
-                <Button
-                  styles={{ padding: "1rem 4rem" }}
-                  onClick={() => handleStart(Difficulty.Hard)}
-                >
-                  <Text style={{ fontWeight: "bold" }}>Hard</Text>
-                </Button>
-              </VStack>
+              </When>
+              <When is={difficulty.isOpen}>
+                <VStack style={{ gap: "1rem" }}>
+                  <Button
+                    styles={{ padding: "1rem 4rem" }}
+                    onClick={() => handleStart(Difficulty.Easy)}
+                  >
+                    <Text style={{ fontWeight: "bold" }}>Easy</Text>
+                  </Button>
+                  <Button
+                    styles={{ padding: "1rem 4rem" }}
+                    onClick={() => handleStart(Difficulty.Medium)}
+                  >
+                    <Text style={{ fontWeight: "bold" }}>Medium</Text>
+                  </Button>
+                  <Button
+                    styles={{ padding: "1rem 4rem" }}
+                    onClick={() => handleStart(Difficulty.Hard)}
+                  >
+                    <Text style={{ fontWeight: "bold" }}>Hard</Text>
+                  </Button>
+                </VStack>
+              </When>
             </When>
           </VStack>
         </When>
