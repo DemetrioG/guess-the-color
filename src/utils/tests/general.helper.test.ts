@@ -1,9 +1,12 @@
+import { renderHook } from "@testing-library/react";
 import {
   generateRandomHex,
   generateRandomHexPair,
   handleScore,
   shuffle,
+  useDisclosure,
 } from "../general.helper";
+import { act } from "react-dom/test-utils";
 
 describe("generateRandomHex", () => {
   test("should return a valid hex code", () => {
@@ -15,13 +18,21 @@ describe("generateRandomHex", () => {
 describe("generateRandomHexPair", () => {
   it("should generate a random hex pair", () => {
     const activeHex = "123456";
-    const randomHexPair = generateRandomHexPair(activeHex);
+    const randomHexPair = generateRandomHexPair(activeHex, 2);
 
     expect(Array.isArray(randomHexPair)).toBeTruthy();
     expect(randomHexPair.length).toBe(2);
     expect(randomHexPair[0] !== activeHex).toBeTruthy();
     expect(randomHexPair[1] !== activeHex).toBeTruthy();
     expect(randomHexPair[0] !== randomHexPair[1]).toBeTruthy();
+  });
+
+  it("should generate a random hex array with length 3", () => {
+    const activeHex = "123456";
+    const randomHexPair = generateRandomHexPair(activeHex, 3);
+
+    expect(Array.isArray(randomHexPair)).toBeTruthy();
+    expect(randomHexPair.length).toBe(3);
   });
 });
 
@@ -81,5 +92,22 @@ describe("handleScore", () => {
     const points = -15;
     const result = handleScore(prevScore, points);
     expect(result).toBe(0);
+  });
+});
+
+describe("useDisclosure", () => {
+  it("should return the initial state as closed", () => {
+    const { result } = renderHook(() => useDisclosure());
+    expect(result.current.isOpen).toBe(false);
+  });
+
+  it("should open and close correctly", () => {
+    const { result } = renderHook(() => useDisclosure());
+
+    act(() => result.current.open());
+    expect(result.current.isOpen).toBe(true);
+
+    act(() => result.current.close());
+    expect(result.current.isOpen).toBe(false);
   });
 });

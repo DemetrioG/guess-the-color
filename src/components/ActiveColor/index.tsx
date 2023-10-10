@@ -47,24 +47,15 @@ export const ActiveColor = (props: ActiveColorProps) => {
               </When>
               <When is={difficulty.isOpen}>
                 <VStack style={{ gap: "1rem" }}>
-                  <Button
-                    styles={{ padding: "1rem 4rem" }}
-                    onClick={() => handleStart(Difficulty.Easy)}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>Easy</Text>
-                  </Button>
-                  <Button
-                    styles={{ padding: "1rem 4rem" }}
-                    onClick={() => handleStart(Difficulty.Medium)}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>Medium</Text>
-                  </Button>
-                  <Button
-                    styles={{ padding: "1rem 4rem" }}
-                    onClick={() => handleStart(Difficulty.Hard)}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>Hard</Text>
-                  </Button>
+                  {buttons.map((item, i) => (
+                    <Button
+                      key={i}
+                      styles={{ padding: "1rem 4rem" }}
+                      onClick={() => handleStart(item.value)}
+                    >
+                      <Text style={{ fontWeight: "bold" }}>{item.label}</Text>
+                    </Button>
+                  ))}
                 </VStack>
               </When>
             </When>
@@ -74,3 +65,18 @@ export const ActiveColor = (props: ActiveColorProps) => {
     </VStack>
   );
 };
+
+const buttons = [
+  {
+    label: "Easy",
+    value: Difficulty.Easy,
+  },
+  {
+    label: "Medium",
+    value: Difficulty.Medium,
+  },
+  {
+    label: "Hard",
+    value: Difficulty.Hard,
+  },
+];
