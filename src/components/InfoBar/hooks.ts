@@ -1,5 +1,5 @@
 import { DataContext } from "@/context/data/dataContext";
-import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
+import { GLOBAL_TIME, RESET_DATA, SESSION_TIME } from "@/utils/general.helper";
 import { useContext, useEffect } from "react";
 
 export const useInfoBar = () => {
@@ -8,8 +8,7 @@ export const useInfoBar = () => {
   function handleRestart() {
     return setData((prevData) => ({
       ...prevData,
-      globalTimer: GLOBAL_TIME,
-      sessionTimer: SESSION_TIME,
+      ...RESET_DATA,
     }));
   }
 
@@ -20,7 +19,12 @@ export const useInfoBar = () => {
       setData((prevData) => {
         if (prevData.globalTimer < 1) {
           clearInterval(globalTimerInterval);
-          return { ...prevData, started: false, globalTimer: GLOBAL_TIME };
+          return {
+            ...prevData,
+            started: false,
+            difficulty: null,
+            globalTimer: GLOBAL_TIME,
+          };
         } else {
           return { ...prevData, globalTimer: prevData.globalTimer - 1 };
         }

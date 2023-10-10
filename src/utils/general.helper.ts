@@ -1,3 +1,4 @@
+import { Difficulty } from "@/context/data/dataContext";
 import { useState } from "react";
 
 export const GLOBAL_TIME = 30;
@@ -5,6 +6,14 @@ export const SESSION_TIME = 10;
 export const CORRECT_ANSWER = 5;
 export const WRONG_ANSWER = -1;
 export const TIMEOUT_ANSWER = -2;
+export const RESET_DATA = {
+  difficulty: null,
+  started: false,
+  score: 0,
+  sidebarList: [],
+  globalTimer: GLOBAL_TIME,
+  sessionTimer: SESSION_TIME,
+};
 
 export function generateRandomHex() {
   const characters = "0123456789ABCDEF";
@@ -18,9 +27,12 @@ export function generateRandomHex() {
   return hex;
 }
 
-export function generateRandomHexPair(activeHex: string) {
+export function generateRandomHexPair(
+  activeHex: string,
+  length: Difficulty | null
+) {
   const randomHexPair: string[] = [];
-  while (randomHexPair.length < 2) {
+  while (randomHexPair.length < (length ?? 2)) {
     const randomHex = generateRandomHex();
     if (randomHex !== activeHex && !randomHexPair.includes(randomHex)) {
       randomHexPair.push(randomHex);
