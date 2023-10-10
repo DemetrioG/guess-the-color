@@ -24,6 +24,7 @@ export const useOptionButtons = (props: OptionButtonsProps) => {
 
     setData((prevData) => ({
       ...prevData,
+      globalTimer: prevData.globalTimer + (rightColor ? 1 : -1),
       sidebarList: [chosedList, ...prevData.sidebarList],
       sessionTimer: SESSION_TIME,
       trigger: Math.random(),
