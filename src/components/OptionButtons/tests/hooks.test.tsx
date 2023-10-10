@@ -1,7 +1,11 @@
 import { renderHook, act } from "@testing-library/react";
 import { useOptionButtons } from "../hooks";
 import { useContext, useEffect } from "react";
-import { DataContext, DataContextProvider } from "@/context/data/dataContext";
+import {
+  DataContext,
+  DataContextProvider,
+  IData,
+} from "@/context/data/dataContext";
 import { SESSION_TIME } from "@/utils/general.helper";
 
 const list = {
@@ -9,16 +13,15 @@ const list = {
   shuffledList: ["#FF0000", "#00FF00", "#3e3e3e"],
 };
 
-const useOptionButtonsWithContext = () => {
+const useOptionButtonsWithContext = (
+  dataUpdater?: (prevData: IData) => IData
+) => {
   const optionHook = useOptionButtons(list);
   const dataHook = useContext(DataContext);
 
   useEffect(() => {
-    dataHook.setData((prevData) => ({
-      ...prevData,
-      started: true,
-      score: 10,
-    }));
+    if (!dataUpdater) return;
+    dataHook.setData(dataUpdater);
   }, []);
 
   return {
@@ -29,9 +32,17 @@ const useOptionButtonsWithContext = () => {
 
 describe("useOptionButtons", () => {
   it("should call setData with the correct values when data.started is true and chosed value are correct", () => {
-    const { result } = renderHook(() => useOptionButtonsWithContext(), {
-      wrapper: DataContextProvider,
-    });
+    const { result } = renderHook(
+      () =>
+        useOptionButtonsWithContext((prevData) => ({
+          ...prevData,
+          started: true,
+          score: 10,
+        })),
+      {
+        wrapper: DataContextProvider,
+      }
+    );
 
     act(() => {
       result.current.handlePressItem("#3e3e3e");
@@ -50,9 +61,17 @@ describe("useOptionButtons", () => {
   });
 
   it("should call setData with the correct values when data.started is true and chosed value are incorrect", () => {
-    const { result } = renderHook(() => useOptionButtonsWithContext(), {
-      wrapper: DataContextProvider,
-    });
+    const { result } = renderHook(
+      () =>
+        useOptionButtonsWithContext((prevData) => ({
+          ...prevData,
+          started: true,
+          score: 10,
+        })),
+      {
+        wrapper: DataContextProvider,
+      }
+    );
 
     act(() => {
       result.current.handlePressItem("#FF0000");
@@ -68,5 +87,25 @@ describe("useOptionButtons", () => {
       },
     ]);
     expect(result.current.data.score).toBe(10 - 1);
+  });
+
+  it("shouldn't call setData when data.started is false", () => {
+    const { result } = renderHook(
+      () =>
+        useOptionButtonsWithContext((prevData) => ({
+          ...prevData,
+          started: false,
+          sessionTimer: 5,
+        })),
+      {
+        wrapper: DataContextProvider,
+      }
+    );
+
+    act(() => {
+      result.current.handlePressItem("#FF0000");
+    });
+
+    expect(result.current.data.sessionTimer).toBe(5);
   });
 });

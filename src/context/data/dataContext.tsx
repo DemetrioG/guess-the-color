@@ -2,7 +2,7 @@ import { ItemProps } from "@/components/Sidebar/types";
 import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
 import React, { createContext, useState } from "react";
 
-interface IData {
+export interface IData {
   started: boolean;
   globalTimer: number;
   sessionTimer: number;
