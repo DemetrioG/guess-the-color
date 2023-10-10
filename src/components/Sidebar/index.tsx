@@ -107,12 +107,12 @@ export const Item = ({ data, index }: { data: ItemProps; index: number }) => {
         }}
       >
         <When is={rightColor}>
-          <div data-testid="check">
+          <div data-testid="check" style={{ width: "20px", height: "20px" }}>
             <Check size={20} />
           </div>
         </When>
         <When is={!rightColor}>
-          <div data-testid="x">
+          <div data-testid="x" style={{ width: "20px", height: "20px" }}>
             <X size={20} />
           </div>
         </When>

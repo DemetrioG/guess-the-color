@@ -25,12 +25,12 @@ export const ChangeTheme = () => {
       onClick={handleChangeTheme}
     >
       <When is={!theme?.isOnDarkTheme}>
-        <div data-testid="moon">
+        <div data-testid="moon" style={{ width: "24px", height: "24px" }}>
           <Moon color={theme?.text} />
         </div>
       </When>
       <When is={!!theme?.isOnDarkTheme}>
-        <div data-testid="sun">
+        <div data-testid="sun" style={{ width: "24px", height: "24px" }}>
           <Sun color={theme?.text} />
         </div>
       </When>
