@@ -24,7 +24,10 @@ export const useOptionButtons = (props: OptionButtonsProps) => {
 
     setData((prevData) => ({
       ...prevData,
-      globalTimer: prevData.globalTimer + (rightColor ? 1 : -1),
+      globalTimer: handleIncreaseOrDecreaseTimer(
+        prevData.globalTimer,
+        rightColor
+      ),
       sidebarList: [chosedList, ...prevData.sidebarList],
       sessionTimer: SESSION_TIME,
       trigger: Math.random(),
@@ -40,3 +43,8 @@ export const useOptionButtons = (props: OptionButtonsProps) => {
     handlePressItem,
   };
 };
+
+function handleIncreaseOrDecreaseTimer(currentTime: number, increase: boolean) {
+  const value = currentTime + (increase ? 1 : -1);
+  return value > 0 ? value : 0;
+}
