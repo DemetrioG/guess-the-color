@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const GLOBAL_TIME = 30;
 export const SESSION_TIME = 10;
 export const CORRECT_ANSWER = 5;
@@ -45,4 +47,14 @@ export function handleScore(prevScore: number, points: number) {
     localStorage.setItem("highScore", score.toString());
   }
   return score;
+}
+
+export function useDisclosure() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return {
+    isOpen,
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
+  };
 }

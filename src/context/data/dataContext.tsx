@@ -2,6 +2,12 @@ import { ItemProps } from "@/components/Sidebar/types";
 import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
 import React, { createContext, useState } from "react";
 
+export enum Difficulty {
+  Easy = 2,
+  Medium = 3,
+  Hard = 4,
+}
+
 export interface IData {
   started: boolean;
   globalTimer: number;
@@ -10,6 +16,7 @@ export interface IData {
   trigger: number;
   score: number;
   chosed: boolean;
+  difficulty: Difficulty | null;
 }
 
 export const initialDataState: IData = {
@@ -20,6 +27,7 @@ export const initialDataState: IData = {
   trigger: 0,
   score: 0,
   chosed: false,
+  difficulty: null,
 };
 
 export const DataContext = createContext<{

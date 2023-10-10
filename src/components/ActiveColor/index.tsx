@@ -2,14 +2,16 @@ import { Text, VStack } from "@/styles/general";
 import { ActiveColorProps } from "./types";
 import { ProgressBar } from "../ProgressBar";
 import { useContext } from "react";
-import { DataContext } from "@/context/data/dataContext";
+import { DataContext, Difficulty } from "@/context/data/dataContext";
 import { When } from "../When";
 import { Button } from "../Button";
 import { useStart } from "./hooks";
+import { useDisclosure } from "@/utils/general.helper";
 
 export const ActiveColor = (props: ActiveColorProps) => {
   const { data } = useContext(DataContext);
   const { handleStart } = useStart();
+  const difficulty = useDisclosure();
 
   return (
     <VStack>
@@ -34,9 +36,36 @@ export const ActiveColor = (props: ActiveColorProps) => {
               height: "100%",
             }}
           >
-            <Button styles={{ padding: "1rem 4rem" }} onClick={handleStart}>
-              <Text style={{ fontWeight: "bold" }}>START</Text>
-            </Button>
+            <When is={!data.difficulty}>
+              <Button
+                styles={{ padding: "1rem 4rem" }}
+                onClick={difficulty.open}
+              >
+                <Text style={{ fontWeight: "bold" }}>START</Text>
+              </Button>
+            </When>
+            <When is={difficulty.isOpen}>
+              <VStack style={{ gap: "1rem" }}>
+                <Button
+                  styles={{ padding: "1rem 4rem" }}
+                  onClick={() => handleStart(Difficulty.Easy)}
+                >
+                  <Text style={{ fontWeight: "bold" }}>Easy</Text>
+                </Button>
+                <Button
+                  styles={{ padding: "1rem 4rem" }}
+                  onClick={() => handleStart(Difficulty.Medium)}
+                >
+                  <Text style={{ fontWeight: "bold" }}>Medium</Text>
+                </Button>
+                <Button
+                  styles={{ padding: "1rem 4rem" }}
+                  onClick={() => handleStart(Difficulty.Hard)}
+                >
+                  <Text style={{ fontWeight: "bold" }}>Hard</Text>
+                </Button>
+              </VStack>
+            </When>
           </VStack>
         </When>
       </div>

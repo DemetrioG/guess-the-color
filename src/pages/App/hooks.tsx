@@ -13,9 +13,9 @@ import { ItemProps } from "@/components/Sidebar/types";
 export const useColors = () => {
   const { data, setData } = useContext(DataContext);
   const [hex, setHex] = useState("#468C98");
-  const [firstColor, secondColor] = generateRandomHexPair(hex);
+  const randomHex = generateRandomHexPair(hex);
   const shuffledList = useMemo(
-    () => shuffle([hex, firstColor, secondColor]),
+    () => shuffle([hex, ...randomHex]),
     [hex]
   );
 
@@ -33,7 +33,7 @@ export const useColors = () => {
 
     const item: ItemProps = {
       color: hex,
-      guessed: firstColor,
+      guessed: randomHex[0],
       time: SESSION_TIME,
     };
 
