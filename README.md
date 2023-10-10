@@ -9,8 +9,8 @@ Você é bom com cores e códigos hexadecimais? Chegou a hora de testar suas hab
 - O Jogo gera uma cor e opções de resposta em hexadecimal, você deve escolher qual é o hexadecimal da cor mostrada.
 - Cada partida tem o tempo máximo de 30s.
 - Você tem o tempo máximo de 10s para escolher qual a resposta correta de cada cor gerada na tela.
-- Para cada resposta correta você ganha 5 pontos no score.
-- Para cada resposta incorreta você perde 1 ponto no score.
+- Para cada resposta correta você ganha 5 pontos no score e 1s é incrementado no tempo total da partida.
+- Para cada resposta incorreta você perde 1 ponto no score e 1s é decrementado do tempo total da partida.
 - Caso você não responda dentro do prazo máximo de 10s você perde 2 pontos no score e uma nova cor é gerada.
 - Sempre que uma nova resposta é fornecida uma nova cor é gerada.
 
