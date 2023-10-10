@@ -51,7 +51,9 @@ describe("useInfoBar", () => {
       }
     );
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+    });
     expect(result.current.data.started).toBe(false);
     expect(result.current.data.globalTimer).toBe(GLOBAL_TIME);
   });
@@ -69,7 +71,9 @@ describe("useInfoBar", () => {
       }
     );
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+    });
     expect(result.current.data.started).toBe(true);
     expect(result.current.data.globalTimer).toBe(1);
   });
