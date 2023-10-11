@@ -3,6 +3,7 @@ import { Color, Item, Sidebar, getContrastColor } from "..";
 import { BaseWrap } from "@/styles/tests/baseTheme.test";
 import { DataContext } from "@/context/data/dataContext";
 import { useContext, useEffect } from "react";
+import { setItem } from "@/utils/storage.helper";
 
 const SIDEBAR_LIST = [
   { guessed: "red", color: "blue", time: 2 },
@@ -14,6 +15,7 @@ const Content = () => {
   const { setData } = useContext(DataContext);
 
   useEffect(() => {
+    setItem("list", JSON.stringify(SIDEBAR_LIST));
     setData((prevData) => ({
       ...prevData,
       sidebarList: SIDEBAR_LIST,

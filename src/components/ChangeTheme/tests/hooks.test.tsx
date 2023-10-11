@@ -1,7 +1,7 @@
-import { DataContextProvider } from "@/context/data/dataContext";
 import { useChangeTheme } from "../hooks";
 import { renderHook } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
+import { ThemeContextProvider } from "@/context/theme/themeContext";
 
 const localStorageMock = {
   getItem: jest.fn(),
@@ -20,7 +20,7 @@ describe("useChangeTheme", () => {
     localStorageMock.getItem.mockReturnValue("dark");
 
     const { result } = renderHook(() => useChangeTheme(), {
-      wrapper: DataContextProvider,
+      wrapper: ThemeContextProvider,
     });
 
     const dispatchEventMock = jest.spyOn(window, "dispatchEvent");
@@ -34,7 +34,7 @@ describe("useChangeTheme", () => {
     localStorageMock.getItem.mockReturnValue("light");
 
     const { result } = renderHook(() => useChangeTheme(), {
-      wrapper: DataContextProvider,
+      wrapper: ThemeContextProvider,
     });
 
     const dispatchEventMock = jest.spyOn(window, "dispatchEvent");
