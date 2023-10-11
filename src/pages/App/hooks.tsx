@@ -14,10 +14,11 @@ import { getItem, setItem } from "@/utils/storage.helper";
 export const useColors = () => {
   const { data, setData } = useContext(DataContext);
   const [hex, setHex] = useState("#468C98");
-  const [firstColor, secondColor] = generateRandomHexPair(hex);
+
+  const randomHex = generateRandomHexPair(hex, data.difficulty);
   const shuffledList = useMemo(
-    () => shuffle([hex, firstColor, secondColor]),
-    [hex]
+    () => shuffle([hex, ...randomHex]),
+    [hex, data.difficulty]
   );
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export const useColors = () => {
 
     const item: ItemProps = {
       color: hex,
-      guessed: firstColor,
+      guessed: randomHex[0],
       time: SESSION_TIME,
     };
 

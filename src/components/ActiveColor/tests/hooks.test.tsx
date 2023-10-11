@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext, DataContextProvider } from "@/context/data/dataContext";
+import { DataContext, DataContextProvider, Difficulty } from "@/context/data/dataContext";
 import { act, renderHook } from "@testing-library/react";
 import { useStart } from "../hooks";
 
@@ -19,7 +19,7 @@ describe("useStart", () => {
       wrapper: DataContextProvider,
     });
 
-    act(() => result.current.handleStart());
+    act(() => result.current.handleStart(Difficulty.Easy));
     expect(result.current.data.started).toBe(true);
     expect(result.current.data.sidebarList).toEqual([]);
     expect(result.current.data.score).toBe(0);

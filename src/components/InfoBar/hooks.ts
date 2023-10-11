@@ -21,7 +21,12 @@ export const useInfoBar = () => {
       setData((prevData) => {
         if (prevData.globalTimer < 1) {
           clearInterval(globalTimerInterval);
-          return { ...prevData, started: false, globalTimer: GLOBAL_TIME };
+          return {
+            ...prevData,
+            started: false,
+            difficulty: null,
+            globalTimer: GLOBAL_TIME,
+          };
         } else {
           return { ...prevData, globalTimer: prevData.globalTimer - 1 };
         }

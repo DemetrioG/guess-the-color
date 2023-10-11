@@ -14,7 +14,7 @@ export const ProgressBar = () => {
       style={{
         width: "100%",
         height: "15px",
-        position: "relative",
+        position: "absolute",
         backgroundColor: theme?.secondary,
       }}
     >

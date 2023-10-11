@@ -9,6 +9,7 @@ export const useStart = () => {
     removeItem("list");
     setData((prevData) => ({
       ...prevData,
+      difficulty: difficulty,
       started: true,
       score: 0,
     }));

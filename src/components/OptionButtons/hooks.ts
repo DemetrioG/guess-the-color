@@ -47,3 +47,8 @@ export const useOptionButtons = (props: OptionButtonsProps) => {
     handlePressItem,
   };
 };
+
+function handleIncreaseOrDecreaseTimer(currentTime: number, increase: boolean) {
+  const value = currentTime + (increase ? 1 : -1);
+  return value > 0 ? value : 0;
+}

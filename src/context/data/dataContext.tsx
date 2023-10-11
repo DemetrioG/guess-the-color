@@ -3,6 +3,12 @@ import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
 import { getItem } from "@/utils/storage.helper";
 import React, { createContext, useEffect, useState } from "react";
 
+export enum Difficulty {
+  Easy = 2,
+  Medium = 3,
+  Hard = 4,
+}
+
 export interface IData {
   started: boolean;
   globalTimer: number;
@@ -11,6 +17,7 @@ export interface IData {
   trigger: number;
   score: number;
   chosed: boolean;
+  difficulty: Difficulty | null;
 }
 
 export const initialDataState: IData = {
@@ -21,6 +28,7 @@ export const initialDataState: IData = {
   trigger: 0,
   score: 0,
   chosed: false,
+  difficulty: null,
 };
 
 export const DataContext = createContext<{

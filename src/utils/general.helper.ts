@@ -27,9 +27,12 @@ export function generateRandomHex() {
   return hex;
 }
 
-export function generateRandomHexPair(activeHex: string) {
+export function generateRandomHexPair(
+  activeHex: string,
+  length: Difficulty | null
+) {
   const randomHexPair: string[] = [];
-  while (randomHexPair.length < 2) {
+  while (randomHexPair.length < (length ?? 2)) {
     const randomHex = generateRandomHex();
     if (randomHex !== activeHex && !randomHexPair.includes(randomHex)) {
       randomHexPair.push(randomHex);
@@ -56,4 +59,14 @@ export function handleScore(prevScore: number, points: number) {
     setItem("highScore", score.toString());
   }
   return score;
+}
+
+export function useDisclosure() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return {
+    isOpen,
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
+  };
 }

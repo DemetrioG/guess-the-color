@@ -7,7 +7,9 @@ export const OptionButtons = (props: OptionButtonsProps) => {
   const { handlePressItem } = useOptionButtons(props);
 
   return (
-    <HStack style={{ justifyContent: "space-between" }}>
+    <HStack
+      style={{ justifyContent: "space-evenly", flexWrap: "wrap", gap: "1rem" }}
+    >
       {props.shuffledList.map((color, i) => (
         <Button
           key={i}

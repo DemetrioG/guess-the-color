@@ -8,9 +8,13 @@ import { ChangeTheme } from "@/components/ChangeTheme";
 import { Reset } from "@/components/Reset";
 import { Sidebar } from "@/components/Sidebar";
 import { useColors } from "./hooks";
+import { DataContext } from "@/context/data/dataContext";
+import { useContext } from "react";
+import { When } from "@/components/When";
 
 const App = () => {
   const { theme }: IThemeProvider = useTheme();
+  const { data } = useContext(DataContext);
   const colors = useColors();
 
   return (
@@ -19,17 +23,19 @@ const App = () => {
       <div
         style={{ background: theme?.primary, height: "100vh", width: "100%" }}
       >
-        <Center style={{ gap: "3rem", height: "100%" }}>
+        <Center style={{ gap: "2rem", height: "100%" }}>
           <Text as={"h1"}>Guess the color</Text>
           <VStack
             style={{
-              gap: "1rem",
+              gap: "2rem",
               width: "400px",
             }}
           >
             <InfoBar />
             <ActiveColor color={colors.activeColor} />
-            <OptionButtons {...colors} />
+            <When is={!!data.difficulty}>
+              <OptionButtons {...colors} />
+            </When>
           </VStack>
         </Center>
         <ChangeTheme />
