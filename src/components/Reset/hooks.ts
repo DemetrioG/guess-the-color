@@ -1,19 +1,17 @@
 import { DataContext } from "@/context/data/dataContext";
-import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
+import { RESET_DATA } from "@/utils/general.helper";
+import { removeItem } from "@/utils/storage.helper";
 import { useContext } from "react";
 
 export const useReset = () => {
   const { setData } = useContext(DataContext);
 
   function handleReset() {
-    localStorage.removeItem("highScore");
+    removeItem("highScore");
+    removeItem("list");
     setData((prevData) => ({
       ...prevData,
-      started: false,
-      score: 0,
-      sidebarList: [],
-      globalTimer: GLOBAL_TIME,
-      sessionTimer: SESSION_TIME,
+      ...RESET_DATA,
     }));
   }
 

@@ -9,6 +9,7 @@ import {
   shuffle,
 } from "@/utils/general.helper";
 import { ItemProps } from "@/components/Sidebar/types";
+import { getItem, setItem } from "@/utils/storage.helper";
 
 export const useColors = () => {
   const { data, setData } = useContext(DataContext);
@@ -37,11 +38,14 @@ export const useColors = () => {
       time: SESSION_TIME,
     };
 
+    const list = getItem("list");
+    const parsedList = list ? JSON.parse(list) : [];
+    setItem("list", JSON.stringify([item, ...parsedList]));
+
     setHex(generateRandomHex());
     setData((prevData) => ({
       ...prevData,
       score: handleScore(prevData.score, TIMEOUT_ANSWER),
-      sidebarList: [item, ...prevData.sidebarList],
     }));
   }, [data.sessionTimer]);
 

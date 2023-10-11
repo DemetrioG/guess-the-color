@@ -1,3 +1,4 @@
+import { getItem } from "@/utils/storage.helper";
 import React, { createContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
@@ -31,13 +32,13 @@ export function ThemeContextProvider({
 
   function handleSetTheme() {
     setTheme(() => ({
-      mode: (localStorage.getItem("theme") as Theme) ?? "light",
+      mode: (getItem("theme") as Theme) ?? "light",
     }));
   }
 
   useEffect(() => {
-    window.addEventListener("storage", handleSetTheme);
-    return () => window.removeEventListener("storage", handleSetTheme);
+    window.addEventListener("theme", handleSetTheme);
+    return () => window.removeEventListener("theme", handleSetTheme);
   }, []);
 
   useEffect(() => {

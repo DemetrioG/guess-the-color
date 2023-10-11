@@ -4,6 +4,7 @@ import { HStack, Text, VStack } from "@/styles/general";
 import { useContext } from "react";
 import { useTheme } from "styled-components";
 import { useInfoBar } from "./hooks";
+import { getItem } from "@/utils/storage.helper";
 
 export const InfoBar = () => {
   const { theme }: IThemeProvider = useTheme();
@@ -63,7 +64,7 @@ export const InfoBar = () => {
         >
           <Text>High Score</Text>
           <Text style={{ fontWeight: "bold" }}>
-            {localStorage.getItem("highScore") ?? 0}
+            {getItem("highScore") ?? 0}
           </Text>
         </HStack>
         <HStack

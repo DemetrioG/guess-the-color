@@ -1,6 +1,7 @@
 import { ItemProps } from "@/components/Sidebar/types";
 import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
-import React, { createContext, useState } from "react";
+import { getItem } from "@/utils/storage.helper";
+import React, { createContext, useEffect, useState } from "react";
 
 export interface IData {
   started: boolean;
@@ -40,6 +41,25 @@ export function DataContextProvider({
   const [data, setData] = useState<IData>({
     ...initialDataState,
   });
+
+  function handleSetList() {
+    const list = getItem("list");
+    setData((prevData) => ({
+      ...prevData,
+      sidebarList: list ? (JSON.parse(list) as ItemProps[]) : [],
+    }));
+  }
+
+  useEffect(() => {
+    window.addEventListener("list", handleSetList);
+    return () => window.removeEventListener("list", handleSetList);
+  }, []);
+
+  useEffect(() => {
+    if (!!window) {
+      handleSetList();
+    }
+  }, []);
 
   return (
     <DataContext.Provider value={{ data, setData }}>

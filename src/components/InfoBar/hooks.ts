@@ -1,15 +1,16 @@
 import { DataContext } from "@/context/data/dataContext";
-import { GLOBAL_TIME, SESSION_TIME } from "@/utils/general.helper";
+import { GLOBAL_TIME, RESET_DATA, SESSION_TIME } from "@/utils/general.helper";
+import { removeItem } from "@/utils/storage.helper";
 import { useContext, useEffect } from "react";
 
 export const useInfoBar = () => {
   const { data, setData } = useContext(DataContext);
 
   function handleRestart() {
+    removeItem("list");
     return setData((prevData) => ({
       ...prevData,
-      globalTimer: GLOBAL_TIME,
-      sessionTimer: SESSION_TIME,
+      ...RESET_DATA,
     }));
   }
 

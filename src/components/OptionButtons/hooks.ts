@@ -8,6 +8,7 @@ import {
 import { useContext } from "react";
 import { ItemProps } from "../Sidebar/types";
 import { OptionButtonsProps } from "./types";
+import { getItem, setItem } from "@/utils/storage.helper";
 
 export const useOptionButtons = (props: OptionButtonsProps) => {
   const { data, setData } = useContext(DataContext);
@@ -22,10 +23,16 @@ export const useOptionButtons = (props: OptionButtonsProps) => {
       time: SESSION_TIME - data.sessionTimer,
     };
 
+    const list = getItem("list");
+    const parsedList = list ? JSON.parse(list) : [];
+    setItem("list", JSON.stringify([chosedList, ...parsedList]));
+
     setData((prevData) => ({
       ...prevData,
-      globalTimer: prevData.globalTimer + (rightColor ? 1 : -1),
-      sidebarList: [chosedList, ...prevData.sidebarList],
+      globalTimer: handleIncreaseOrDecreaseTimer(
+        prevData.globalTimer,
+        rightColor
+      ),
       sessionTimer: SESSION_TIME,
       trigger: Math.random(),
       score: handleScore(

@@ -1,10 +1,9 @@
+import { getItem, setItem } from "@/utils/storage.helper";
+
 export const useChangeTheme = () => {
   function handleChangeTheme() {
-    const isOnDarkTheme = localStorage.getItem("theme") === "dark";
-    isOnDarkTheme
-      ? localStorage.setItem("theme", "light")
-      : localStorage.setItem("theme", "dark");
-    return window.dispatchEvent(new Event("storage"));
+    const isOnDarkTheme = getItem("theme") === "dark";
+    return isOnDarkTheme ? setItem("theme", "light") : setItem("theme", "dark");
   }
 
   return {

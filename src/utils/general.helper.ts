@@ -1,8 +1,19 @@
+import { Difficulty } from "@/context/data/dataContext";
+import { useState } from "react";
+import { getItem, setItem } from "./storage.helper";
+
 export const GLOBAL_TIME = 30;
 export const SESSION_TIME = 10;
 export const CORRECT_ANSWER = 5;
 export const WRONG_ANSWER = -1;
 export const TIMEOUT_ANSWER = -2;
+export const RESET_DATA = {
+  difficulty: null,
+  started: false,
+  score: 0,
+  globalTimer: GLOBAL_TIME,
+  sessionTimer: SESSION_TIME,
+};
 
 export function generateRandomHex() {
   const characters = "0123456789ABCDEF";
@@ -40,9 +51,9 @@ export function shuffle(array: string[]) {
 export function handleScore(prevScore: number, points: number) {
   const calcScore = prevScore + points;
   const score = calcScore > 0 ? calcScore : 0;
-  const highScore = Number(localStorage.getItem("highScore") ?? 0);
+  const highScore = Number(getItem("highScore") ?? 0);
   if (score > highScore) {
-    localStorage.setItem("highScore", score.toString());
+    setItem("highScore", score.toString());
   }
   return score;
 }
