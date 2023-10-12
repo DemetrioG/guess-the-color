@@ -1,6 +1,7 @@
 import { DataContext } from "@/context/data/dataContext";
 import {
   CORRECT_ANSWER,
+  GLOBAL_TIME,
   SESSION_TIME,
   WRONG_ANSWER,
   handleScore,
@@ -50,5 +51,6 @@ export const useOptionButtons = (props: OptionButtonsProps) => {
 
 function handleIncreaseOrDecreaseTimer(currentTime: number, increase: boolean) {
   const value = currentTime + (increase ? 1 : -1);
+  if (value > GLOBAL_TIME) return GLOBAL_TIME;
   return value > 0 ? value : 0;
 }
