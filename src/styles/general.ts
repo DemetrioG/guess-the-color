@@ -12,6 +12,19 @@ export const GlobalStyle = createGlobalStyle`
         height: 100vh;
         background-color: ${({ theme: { theme } }) => theme.primary};
     }
+
+    ::-webkit-scrollbar {
+      width: 0.6rem;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: ${({ theme: { theme } }) => theme.primary};
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme: { theme } }) => theme.tertiary};
+      border-radius: 10px;
+    }
 `;
 
 export const VStack = styled.div`

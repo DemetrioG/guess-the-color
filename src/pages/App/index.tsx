@@ -23,15 +23,15 @@ const App = () => {
           padding: "2rem 0",
         }}
       >
-        <div
+        <Center
           style={{
+            flexDirection: "unset",
             overflow: "auto",
             height: "calc(100vh - 4rem)",
             width: "100%",
-            margin: "auto",
           }}
         >
-          <div style={{ gap: "2rem" }}>
+          <div style={{ margin: "auto" }}>
             <Text
               as={"h1"}
               style={{ textAlign: "center", marginBottom: "2rem" }}
@@ -52,7 +52,7 @@ const App = () => {
               </When>
             </VStack>
           </div>
-        </div>
+        </Center>
         <ChangeTheme />
         <Reset />
       </Center>
