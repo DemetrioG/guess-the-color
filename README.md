@@ -7,6 +7,7 @@ Você é bom com cores e códigos hexadecimais? Chegou a hora de testar suas hab
 
 ## Regras
 - O Jogo gera uma cor e opções de resposta em hexadecimal, você deve escolher qual é o hexadecimal da cor mostrada.
+- Você poderá escolher a dificuldade entre Fácil (3 opções), Médio (4 opções) e Difícil (5 opções).
 - Cada partida tem o tempo máximo de 30s.
 - Você tem o tempo máximo de 10s para escolher qual a resposta correta de cada cor gerada na tela.
 - Para cada resposta correta você ganha 5 pontos no score e 1s é incrementado no tempo total da partida.
@@ -15,7 +16,7 @@ Você é bom com cores e códigos hexadecimais? Chegou a hora de testar suas hab
 - Sempre que uma nova resposta é fornecida uma nova cor é gerada.
 
 ## Prévia
-![Group 12](https://github.com/DemetrioG/guess-the-color/assets/79758394/9e0d68bb-e25f-4cd7-bc5f-c9a3d5dc8b48)
+![image](https://github.com/DemetrioG/guess-the-color/assets/79758394/7af97736-e7e0-4374-b9d1-bc1d3d972fe8)
 
 ## Instalação
 
