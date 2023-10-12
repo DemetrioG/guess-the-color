@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { DataContextProvider } from "@/context/data/dataContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
-const App = dynamic(() => import("./App"), { ssr: false });
+const App = dynamic(() => import("../components/App"), { ssr: false });
 
 export default function Home() {
   return (

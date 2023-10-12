@@ -12,7 +12,7 @@ import { When } from "@/components/When";
 
 const App = () => {
   const { data } = useContext(DataContext);
-  const colors = useColors();
+  const { activeColor, shuffledList } = useColors();
 
   return (
     <HStack>
@@ -46,9 +46,12 @@ const App = () => {
               }}
             >
               <InfoBar />
-              <ActiveColor color={colors.activeColor} />
+              <ActiveColor color={activeColor} />
               <When is={!!data.difficulty}>
-                <OptionButtons {...colors} />
+                <OptionButtons
+                  activeColor={activeColor}
+                  shuffledList={shuffledList}
+                />
               </When>
             </VStack>
           </div>
