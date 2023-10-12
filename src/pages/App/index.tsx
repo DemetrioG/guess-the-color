@@ -20,7 +20,7 @@ const App = () => {
       <Center
         style={{
           width: "100%",
-          padding: "2rem",
+          padding: "2rem 0",
         }}
       >
         <div
@@ -28,14 +28,21 @@ const App = () => {
             overflow: "auto",
             height: "calc(100vh - 4rem)",
             width: "100%",
+            margin: "auto",
           }}
         >
-          <Center style={{ gap: "2rem" }}>
-            <Text as={"h1"}>Guess the color</Text>
+          <div style={{ gap: "2rem" }}>
+            <Text
+              as={"h1"}
+              style={{ textAlign: "center", marginBottom: "2rem" }}
+            >
+              Guess the color
+            </Text>
             <VStack
               style={{
                 gap: "1rem",
                 width: "400px",
+                margin: "auto",
               }}
             >
               <InfoBar />
@@ -44,7 +51,7 @@ const App = () => {
                 <OptionButtons {...colors} />
               </When>
             </VStack>
-          </Center>
+          </div>
         </div>
         <ChangeTheme />
         <Reset />
