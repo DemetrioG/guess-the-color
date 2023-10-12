@@ -19,27 +19,33 @@ const App = () => {
       <Sidebar />
       <Center
         style={{
-          height: "100vh",
           width: "100%",
-          overflow: "auto",
           padding: "2rem",
         }}
       >
-        <Center style={{ gap: "2rem" }}>
-          <Text as={"h1"}>Guess the color</Text>
-          <VStack
-            style={{
-              gap: "1rem",
-              width: "400px",
-            }}
-          >
-            <InfoBar />
-            <ActiveColor color={colors.activeColor} />
-            <When is={!!data.difficulty}>
-              <OptionButtons {...colors} />
-            </When>
-          </VStack>
-        </Center>
+        <div
+          style={{
+            overflow: "auto",
+            height: "calc(100vh - 4rem)",
+            width: "100%",
+          }}
+        >
+          <Center style={{ gap: "2rem" }}>
+            <Text as={"h1"}>Guess the color</Text>
+            <VStack
+              style={{
+                gap: "1rem",
+                width: "400px",
+              }}
+            >
+              <InfoBar />
+              <ActiveColor color={colors.activeColor} />
+              <When is={!!data.difficulty}>
+                <OptionButtons {...colors} />
+              </When>
+            </VStack>
+          </Center>
+        </div>
         <ChangeTheme />
         <Reset />
       </Center>
