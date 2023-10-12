@@ -54,11 +54,14 @@ export function shuffle(array: string[]) {
 export function handleScore(prevScore: number, points: number) {
   const calcScore = prevScore + points;
   const score = calcScore > 0 ? calcScore : 0;
+  return score;
+}
+
+export function handleHighScore(score: number) {
   const highScore = Number(getItem("highScore") ?? 0);
   if (score > highScore) {
-    setItem("highScore", score.toString());
+    return setItem("highScore", score.toString());
   }
-  return score;
 }
 
 export function useDisclosure() {

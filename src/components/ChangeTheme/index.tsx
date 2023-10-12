@@ -19,7 +19,7 @@ export const ChangeTheme = () => {
         padding: "0.5rem",
         backgroundColor: theme?.secondary,
         borderRadius: 50,
-        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        boxShadow: "rgba(17, 17, 26, 0.1) 0px 0px 16px",
         cursor: "pointer",
       }}
       onClick={handleChangeTheme}

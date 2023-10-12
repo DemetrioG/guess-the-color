@@ -1,5 +1,10 @@
 import { DataContext } from "@/context/data/dataContext";
-import { GLOBAL_TIME, RESET_DATA, SESSION_TIME } from "@/utils/general.helper";
+import {
+  GLOBAL_TIME,
+  RESET_DATA,
+  SESSION_TIME,
+  handleHighScore,
+} from "@/utils/general.helper";
 import { removeItem } from "@/utils/storage.helper";
 import { useContext, useEffect } from "react";
 
@@ -21,6 +26,8 @@ export const useInfoBar = () => {
       setData((prevData) => {
         if (prevData.globalTimer < 1) {
           clearInterval(globalTimerInterval);
+          handleHighScore(prevData.score);
+
           return {
             ...prevData,
             started: false,

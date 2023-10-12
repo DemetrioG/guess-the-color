@@ -103,7 +103,7 @@ export const Item = ({ data, index }: { data: ItemProps; index: number }) => {
           height: "max-content",
           borderRadius: 50,
           backgroundColor: rightColor ? theme?.green : theme?.red,
-          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+          boxShadow: "rgba(17, 17, 26, 0.1) 0px 0px 16px",
         }}
       >
         <When is={rightColor}>

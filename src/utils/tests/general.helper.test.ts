@@ -2,11 +2,18 @@ import { renderHook } from "@testing-library/react";
 import {
   generateRandomHex,
   generateRandomHexPair,
+  handleHighScore,
   handleScore,
   shuffle,
   useDisclosure,
 } from "../general.helper";
 import { act } from "react-dom/test-utils";
+
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+};
 
 describe("generateRandomHex", () => {
   test("should return a valid hex code", () => {
@@ -92,6 +99,32 @@ describe("handleScore", () => {
     const points = -15;
     const result = handleScore(prevScore, points);
     expect(result).toBe(0);
+  });
+});
+
+describe("handleHighScore", () => {
+  beforeEach(() => {
+    localStorageMock.getItem.mockReset();
+    localStorageMock.setItem.mockReset();
+    Object.defineProperty(window, "localStorage", {
+      value: localStorageMock,
+    });
+  });
+
+  it("should update the high score if the input score is greater than the current high score", () => {
+    localStorageMock.getItem.mockReturnValue("10");
+    act(() => handleHighScore(20));
+
+    expect(localStorageMock.getItem).toHaveBeenCalledWith("highScore");
+    expect(localStorageMock.setItem).toHaveBeenCalledWith("highScore", "20");
+  });
+
+  it("should not update the high score if the input score is less than or equal to the current high score", () => {
+    localStorageMock.getItem.mockReturnValueOnce("30");
+    act(() => handleHighScore(20));
+
+    expect(localStorageMock.getItem).toHaveBeenCalledWith("highScore");
+    expect(localStorageMock.setItem).not.toHaveBeenCalled();
   });
 });
 
