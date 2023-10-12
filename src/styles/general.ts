@@ -7,9 +7,10 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     
-    body {
+    html {
         width: 100vw;
         height: 100vh;
+        background-color: ${({ theme: { theme } }) => theme.primary};
     }
 `;
 
