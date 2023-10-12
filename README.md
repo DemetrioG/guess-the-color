@@ -18,6 +18,10 @@ Você é bom com cores e códigos hexadecimais? Chegou a hora de testar suas hab
 ## Prévia
 ![image](https://github.com/DemetrioG/guess-the-color/assets/79758394/7af97736-e7e0-4374-b9d1-bc1d3d972fe8)
 
+## Link
+- Caso deseje acessar pela web, o jogo está hospedado no link: https://guess-the-color-rl67lqmc4-demetriog.vercel.app
+- Caso deseje acessar localmente, siga o passo a passo de `Instalação`
+
 ## Instalação
 
 1. Clone o repositório para seu ambiente local:
@@ -30,7 +34,7 @@ git clone https://github.com/DemetrioG/guess-the-color.git
 npm install
 ```
 
-## Testes
+### Testes
 
 Para rodar os testes do projeto, execute:
 ```bash
@@ -42,7 +46,7 @@ Caso queira visualizar a cobertura de testes, execute:
 npm run test:coverage
 ```
 
-## Execução
+### Execução
 
 ```bash
 npm run dev
